@@ -1,5 +1,7 @@
 import sys
 import os
+import requests # 20211219更新
+
 # comment out below line to enable tensorflow logging outputs
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import time
@@ -264,6 +266,7 @@ class VehiclesCounting():
             names = np.array(names)
             count = len(names)
             if count:
+                r = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateCount/'+str(count))
                 cv2.putText(frame, "Objects being tracked: {}".format(count), (5, 35), cv2.FONT_HERSHEY_COMPLEX_SMALL, 2, (0, 255, 0), 2)
                 print("Objects being tracked: {}".format(count))
             # delete detections that are not in allowed_classes
