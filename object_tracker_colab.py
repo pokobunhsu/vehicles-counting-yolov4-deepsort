@@ -94,6 +94,9 @@ class VehiclesCounting():
         return math.degrees(math.atan2(y, x))
 
     def run(self):
+        r = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateCount/0')
+        r = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateUpCount/0')
+        r = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateDownCount/0')
             # Definition of the parameters
         max_cosine_distance = 0.4
         nn_budget = None
@@ -364,6 +367,9 @@ class VehiclesCounting():
                 del memory[list(memory)[0]]
 
                 # Draw total count.
+            r = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateUpCount/'+str(up_count))
+            g = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateDownCount/'+str(down_count))
+
             cv2.putText(frame, "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),
                         str(down_count)), (int(0.05 * frame.shape[1]), int(0.1 * frame.shape[0])), 0,
                         1.5e-3 * frame.shape[0], (0, 255, 255), 2)

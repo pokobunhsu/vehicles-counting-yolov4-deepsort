@@ -2,26 +2,61 @@
 <html lang="zh-Hant-TW">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="utf-8">
-  <title>交通車流數量辨識系統</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>交通車流數量辨識系統</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="./script.js"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">交通車流數量辨識系統</a>
-    </div>
-  </nav>
-  <center>
-    <img src="{{ url_for('video_feed') }}" alt="影像取得失敗，請重新整理!" width="100%">
-  </center>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">交通車流數量辨識系統</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">目前畫面車輛：<span id="nowCount"></span> 台</li>
+                        <li class="list-group-item">上行累計車輛：<span id="nowUpCount"></span> 台</li>
+                        <li class="list-group-item">下行累計車輛：<span id="nowUpCount"></span> 台</li>
+                    </ul>
+                    <div class="card-footer">
+                        Card footer
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <img src="{{ url_for('video_feed') }}" alt="影像取得失敗，請重新整理!" width="100%">
+            </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+        </div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script>
+        firebase.initializeApp({
+            databaseURL: "https://pokobunapi-default-rtdb.firebaseio.com/"
+        });
+
+        const database = firebase.database();
+
+
+        database.ref('ProjectOV/count/nowCount').on('value', e => {
+            document.querySelector('#nowCount').textContent = e.val()
+        });
+    </script>
 </body>
 
 </html>
