@@ -53,9 +53,12 @@
         const database = firebase.database();
 
 
-        database.ref('ProjectOV/count/nowCount').on('value', e => {
-            document.querySelector('#nowCount').textContent = e.val()
-        });
+        database.ref('ProjectOV/count').on('value', e => {
+            document.querySelector('#nowCount').textContent = e.val().nowCount
+            document.querySelector('#nowDownCount').textContent = e.val().nowDownCount
+            document.querySelector('#nowUpCount').textContent = e.val().nowUpCount
+
+        })
     </script>
 </body>
 
