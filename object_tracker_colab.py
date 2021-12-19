@@ -304,7 +304,7 @@ class VehiclesCounting():
 
             line = [(x1, y1), (x2, y2)]
             # draw yellow line
-            cv2.line(frame, line[0], line[1], (0, 255, 255), 2)
+            cv2.line(frame, line[0], line[1], (0, 255, 255), 10)
 
             # update tracks
             for track in tracker.tracks:
