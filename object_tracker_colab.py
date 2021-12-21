@@ -370,9 +370,9 @@ class VehiclesCounting():
             r = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateUpCount/'+str(up_count))
             g = requests.get('https://pokobun-api.herokuapp.com/api/ProjectOV/updateDownCount/'+str(down_count))
 
-            cv2.putText(frame, "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),
-                        str(down_count)), (int(0.05 * frame.shape[1]), int(0.1 * frame.shape[0])), 0,
-                        1.5e-3 * frame.shape[0], (0, 255, 255), 2)
+            # cv2.putText(frame, "Total: {} ({} up, {} down)".format(str(total_counter), str(up_count),
+            #             str(down_count)), (int(0.05 * frame.shape[1]), int(0.1 * frame.shape[0])), 0,
+            #             1.5e-3 * frame.shape[0], (0, 255, 255), 2)
 
             if show_detections:
                 for det in detections:
@@ -388,8 +388,8 @@ class VehiclesCounting():
             y = 0.2 * frame.shape[0]
             for cls in class_counter:
                 class_count = class_counter[cls]
-                cv2.putText(frame, str(cls) + " " + str(class_count), (int(0.05 * frame.shape[1]), int(y)), 0,
-                            1.5e-3 * frame.shape[0], (0, 255, 255), 2)
+                # cv2.putText(frame, str(cls) + " " + str(class_count), (int(0.05 * frame.shape[1]), int(y)), 0,
+                #             1.5e-3 * frame.shape[0], (0, 255, 255), 2)
                 y += 0.05 * frame.shape[0]
 
                 # calculate current minute
